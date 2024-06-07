@@ -104,6 +104,14 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /**
+ * Scroll
+ */
+let scrollY = window.scrollY;
+window.addEventListener("scroll", () => {
+  scrollY = window.scrollY;
+});
+
+/**
  * Animate
  */
 const clock = new THREE.Clock();
@@ -116,6 +124,9 @@ const tick = () => {
     mesh.rotation.x = elapsedTime * 0.1;
     mesh.rotation.y = elapsedTime * 0.12;
   }
+
+  // Animate camera
+  camera.position.y = (-scrollY / sizes.height) * objectsDistance;
 
   // Render
   renderer.render(scene, camera);
